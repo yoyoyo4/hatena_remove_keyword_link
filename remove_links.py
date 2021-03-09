@@ -1,3 +1,8 @@
+# [][]スマブラ[]SP[] 要バグ修正
+# スマブラとスマブラSPで両方ヒットしている
+# 他の単語に内包されている単語を除く処理が必要
+
+
 # 入力1 対象はてなブログ記事のURL
 # 入力2 対象はてなブログ記事のHTML編集本文(クリップボードにコピーしておく)
 # 処理 キーワードリンクが張られている記事内の全単語Xを、[]X[]という形に置換する
@@ -6,7 +11,7 @@
 import requests, re, pyperclip
 from bs4 import BeautifulSoup
 
-blog_url = 'https://yon4.hatenablog.com/entry/2021/01/30/041707' # はてなブログ記事のURL
+blog_url = 'https://yon4.hatenablog.com/entry/2021/03/07/204011' # はてなブログ記事のURL
 
 # はてなブログ記事の｢HTML編集｣本文
 # 記事ソースの本文(<div class="entry-content"> の内部)は、HTML編集で表示される内容とは異なることに注意
