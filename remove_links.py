@@ -12,17 +12,16 @@ import requests, re, pyperclip
 from bs4 import BeautifulSoup
 
 blog_url = input("キーワードリンクを除去したい記事のURLを入力してください : ")
-
-# 記事サイトソースの本文(<div class="entry-content"> の内部)は、HTML編集で表示される内容とは異なる
-_ = input("記事のHTML編集本文を全てコピーした後、Enterキーを押してください")
-blog_html = pyperclip.paste()
-
 res = requests.get(blog_url)
 soup = BeautifulSoup(res.text, 'html.parser')
+
+# 記事サイトソースの本文(<div class="entry-content"> の内部)は、HTML編集で表示される内容とは異なる
+_ = input("記事のHTML編集本文をコピーした後、Enterキーを押してください")
+blog_html = pyperclip.paste()
 soup_html = BeautifulSoup(blog_html, 'html.parser')
 
-# キーワードリンクが張られた単語一覧を取得
-linked_keywords = set(url.get_text() for url in soup.find_all('a') if "http://d.hatena.ne.jp/keyword/" in str(url.get('href')))
+# キーワードリンクが張られた単語一覧を取得し、辞書順に並べる
+linked_keywords = sorted(list(set(url.get_text() for url in soup.find_all('a') if "http://d.hatena.ne.jp/keyword/" in str(url.get('href')))))
 
 for lk in linked_keywords:
     for with_lk in soup_html.find_all(text=re.compile(".*" + lk + ".*")):
