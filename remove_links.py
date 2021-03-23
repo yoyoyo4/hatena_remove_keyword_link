@@ -22,7 +22,7 @@ for lk in linked_keywords:
     for with_lk in soup_html.find_all(text=re.compile(".*" + lk + ".*")):
         s = with_lk.string
         if s[0] != "[" or s[-1] != "]": # Twitter埋め込みなどのコマンドを置換候補から除く
-            with_lk.replace_with(s.replace(lk, "[]" + lk + "[]")) # リンク付きキーワードを[]で囲む
+            with_lk.replace_with(s.replace("[]" + lk + "[]", lk).replace(lk, "[]" + lk + "[]")) # リンク付きキーワードを[]で囲む。2重付与しないよう既に囲まれたものを戻してから
 
 pyperclip.copy(str(soup_html))
 print("キーワードリンク除去処理済のHTML本文がコピーされました")
