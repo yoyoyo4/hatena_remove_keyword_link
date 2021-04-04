@@ -6,12 +6,12 @@
 import requests, re, pyperclip
 from bs4 import BeautifulSoup
 
-blog_url = input("キーワードリンクを除去したい記事のURLを入力してください : ")
+blog_url = input("キーワードリンクを除去したい記事のURLを入力し、Enterキーを押してください : ")
 res = requests.get(blog_url)
 soup = BeautifulSoup(res.text, 'html.parser')
 
 # 記事サイトソースの本文(<div class="entry-content"> の内部)は、HTML編集で表示される内容とは異なる
-_ = input("記事のHTML編集本文をコピーした後、Enterキーを押してください")
+_ = input("記事のHTML編集本文をコピーし、Enterキーを押してください")
 blog_html = pyperclip.paste()
 soup_html = BeautifulSoup(blog_html, 'html.parser')
 
