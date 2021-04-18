@@ -1,9 +1,13 @@
+# Copyright (c) 2021 YON
+# This software is released under the MIT License, see LICENSE.
+
 # 入力1 対象はてなブログ記事のURL
 # 入力2 対象はてなブログ記事のHTML編集本文
 # 処理 キーワードリンクが張られている記事内の全単語Xを、[]X[]という形に置換する
 # 出力 置換後のHTML編集本文(クリップボードに格納される)
 
-import requests, re, pyperclip
+import re
+import requests, pyperclip
 from bs4 import BeautifulSoup
 
 blog_url = input("キーワードリンクを除去したいはてなブログ記事のURLを入力し、Enterキーを押してください : ")
