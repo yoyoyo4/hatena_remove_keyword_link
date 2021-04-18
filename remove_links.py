@@ -6,12 +6,12 @@
 import requests, re, pyperclip
 from bs4 import BeautifulSoup
 
-blog_url = input("キーワードリンクを除去したい記事のURLを入力し、Enterキーを押してください : ")
+blog_url = input("キーワードリンクを除去したいはてなブログ記事のURLを入力し、Enterキーを押してください : ")
 res = requests.get(blog_url)
 soup = BeautifulSoup(res.text, 'html.parser')
 
 # 記事サイトソースの本文(<div class="entry-content"> の内部)は、HTML編集で表示される内容とは異なる
-_ = input("記事のHTML編集本文をコピーし、Enterキーを押してください")
+_ = input("記事の｢HTML編集｣本文をコピーし、Enterキーを押してください")
 blog_html = pyperclip.paste()
 soup_html = BeautifulSoup(blog_html, 'html.parser')
 
@@ -25,4 +25,4 @@ for lk in linked_keywords:
             with_lk.replace_with(s.replace("[]" + lk + "[]", lk).replace(lk, "[]" + lk + "[]")) # リンク付きキーワードを[]で囲む。2重付与しないよう既に囲まれたものを戻してから
 
 pyperclip.copy(str(soup_html))
-print("キーワードリンク除去処理済のHTML本文がコピーされました")
+_ = input("リンク除去処理済のHTML本文がコピーされました。Enterキーを押して終了してください")
