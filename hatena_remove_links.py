@@ -46,6 +46,7 @@ while True:
         soup_html = BeautifulSoup(blog_html, 'html.parser')
 
         # キーワードリンクが張られた単語一覧を取得し、文字数順に並べる
+        # 文字列AとABが両方ともキーワードリンク対象のとき、Aから先に検索してAB→[]A[]BとするとABの検索に引っかからなくなり、2重付与を防げる
         linked_keywords = sorted(list(set(url.get_text() for url in soup.find_all('a') if "http://d.hatena.ne.jp/keyword/" in str(url.get('href')))), key=len)
 
         for lk in linked_keywords:
