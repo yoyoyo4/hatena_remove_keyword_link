@@ -45,8 +45,8 @@ while True:
         blog_html = values['-IN-']
         soup_html = BeautifulSoup(blog_html, 'html.parser')
 
-        # キーワードリンクが張られた単語一覧を取得し、辞書順に並べる
-        linked_keywords = sorted(list(set(url.get_text() for url in soup.find_all('a') if "http://d.hatena.ne.jp/keyword/" in str(url.get('href')))))
+        # キーワードリンクが張られた単語一覧を取得し、文字数順に並べる
+        linked_keywords = sorted(list(set(url.get_text() for url in soup.find_all('a') if "http://d.hatena.ne.jp/keyword/" in str(url.get('href')))), key=len)
 
         for lk in linked_keywords:
             for with_lk in soup_html.find_all(text=re.compile(".*" + lk + ".*")):
